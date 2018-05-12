@@ -69,7 +69,7 @@ public class Home extends AppCompatActivity {
                        kisiListele.putExtra("email",email);
                        startActivity(kisiListele);*/
 
-                        if(new KisiDAO().create(kisi)){
+                        if(new KisiDAO(getApplicationContext()).create(kisi)){
                          AndroTool.mesajVer(getApplicationContext(),"Kayıt Başarılı");
                         }else{
                             AndroTool.mesajVer(getApplicationContext(),"Kayıt Yapılamadı");

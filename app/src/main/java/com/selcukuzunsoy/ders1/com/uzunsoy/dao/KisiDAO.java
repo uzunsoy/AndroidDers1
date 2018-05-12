@@ -1,6 +1,7 @@
 package com.selcukuzunsoy.ders1.com.uzunsoy.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -18,16 +19,15 @@ import java.util.concurrent.ExecutionException;
 
 public class KisiDAO implements BaseDao<Kisi> {
     SQLiteDatabase db = null;
+    Context context = null;
 
-
-    public KisiDAO() {
-
-
+    public KisiDAO(Context context) {
+        this.context = context;
     }
 
     @Override
     public boolean create(Kisi nesne) {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getWritableDatabase();
+        db = new DBHelper(this.context).getWritableDatabase();
 
         try {
             ContentValues kisiBilgisi = new ContentValues();
@@ -49,7 +49,7 @@ public class KisiDAO implements BaseDao<Kisi> {
 
     @Override
     public Kisi read(int id) {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
+        db = new DBHelper(this.context).getReadableDatabase();
         Cursor cur = null;
         try {
 
@@ -75,7 +75,7 @@ public class KisiDAO implements BaseDao<Kisi> {
     }
 
     public Kisi read(String telefon) {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
+        db = new DBHelper(this.context).getReadableDatabase();
         Cursor cur = null;
         try {
             cur = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO
@@ -99,7 +99,7 @@ public class KisiDAO implements BaseDao<Kisi> {
     }
 
     public int kisiSay() {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
+        db = new DBHelper(this.context).getReadableDatabase();
         try {
             int kayitSayisi = (int) DatabaseUtils.queryNumEntries(db, DBHelper.KISI_TABLO);
             return kayitSayisi;
@@ -115,7 +115,7 @@ public class KisiDAO implements BaseDao<Kisi> {
 
     @Override
     public boolean update(Kisi nesne) {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getWritableDatabase();
+        db = new DBHelper(this.context).getWritableDatabase();
 
         try {
             ContentValues kisi_bilgisi = new ContentValues();
@@ -136,7 +136,7 @@ public class KisiDAO implements BaseDao<Kisi> {
 
     @Override
     public boolean delete(int id) {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getWritableDatabase();
+        db = new DBHelper(this.context).getWritableDatabase();
 
         try {
             db.delete(DBHelper.KISI_TABLO, " ID=? ", new String[]{"" + id});
@@ -151,7 +151,7 @@ public class KisiDAO implements BaseDao<Kisi> {
     }
 
     public List<Kisi> readAll(Integer count, Integer start) {
-        db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
+        db = new DBHelper(this.context).getReadableDatabase();
         Cursor datalar = null;
         try {
 
