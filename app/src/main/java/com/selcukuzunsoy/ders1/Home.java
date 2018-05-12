@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.selcukuzunsoy.ders1.com.uzunsoy.dao.KisiDAO;
 import com.selcukuzunsoy.ders1.com.uzunsoy.modal.Kisi;
 import com.selcukuzunsoy.ders1.com.uzunsoy.tools.AndroTool;
 import com.selcukuzunsoy.ders1.com.uzunsoy.tools.Ornek;
@@ -61,12 +62,18 @@ public class Home extends AppCompatActivity {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
                        //AndroTool.mesajVer(getApplicationContext(),"Kişi Kayıt Edildi");
-                       Intent kisiListele = new Intent(getApplicationContext(),KisiListele.class);
+                       /*Intent kisiListele = new Intent(getApplicationContext(),KisiListele.class);
                        kisiListele.putExtra("ad",ad);
                        kisiListele.putExtra("soyad",soyad);
                        kisiListele.putExtra("telefon",telefon);
                        kisiListele.putExtra("email",email);
-                       startActivity(kisiListele);
+                       startActivity(kisiListele);*/
+
+                        if(new KisiDAO().create(kisi)){
+                         AndroTool.mesajVer(getApplicationContext(),"Kayıt Başarılı");
+                        }else{
+                            AndroTool.mesajVer(getApplicationContext(),"Kayıt Yapılamadı");
+                        }
                    }
                })
                .setNegativeButton("İptal", new DialogInterface.OnClickListener() {

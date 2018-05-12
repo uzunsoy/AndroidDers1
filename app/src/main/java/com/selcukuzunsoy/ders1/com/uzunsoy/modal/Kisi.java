@@ -7,10 +7,19 @@ import java.io.Serializable;
  */
 public class Kisi implements Serializable {
 
+    private Integer ID;
     private String AD;
     private String SOYAD;
     private String TELEFON;
     private String EMAIL;
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
 
     public String getAD() {
         return AD;
