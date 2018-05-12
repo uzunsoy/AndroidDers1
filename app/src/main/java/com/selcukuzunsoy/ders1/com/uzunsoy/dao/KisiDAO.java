@@ -156,9 +156,10 @@ public class KisiDAO implements BaseDao<Kisi> {
         try {
 
             List<Kisi> tumKisiler = new ArrayList<>();
-            datalar = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO + " ORDER BY ID LIMIT " + count + "," + start, null);
+            datalar = db.rawQuery("SELECT * FROM REHBER", null);
             datalar.moveToFirst();
-            while (datalar.isAfterLast()) {
+            Log.i("Bilgi Adedi:",""+datalar.getCount());
+            while (!datalar.isAfterLast()) {
 
                 Integer ID = datalar.getInt(datalar.getColumnIndex(DBHelper.KISI_COL_ID));
                 String AD = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_AD));
@@ -176,7 +177,7 @@ public class KisiDAO implements BaseDao<Kisi> {
                 tumKisiler.add(kisi);
                 datalar.moveToNext();
             }
-
+            return tumKisiler;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -185,7 +186,7 @@ public class KisiDAO implements BaseDao<Kisi> {
             if (!datalar.isClosed())
                 datalar.close();
         }
-        return null;
+        return new ArrayList<>();
     }
 
 

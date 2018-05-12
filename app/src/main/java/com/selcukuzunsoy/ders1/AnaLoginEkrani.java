@@ -28,7 +28,7 @@ public class AnaLoginEkrani extends AppCompatActivity {
 
              //TODO: Ana ekranı çağır
 
-                Intent ekran = new Intent(getApplicationContext(),Home.class);
+                Intent ekran = new Intent(getApplicationContext(),Menu.class);
                 startActivity(ekran);
 
 

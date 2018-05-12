@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/ptGenisYazi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Geniş Yazı" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ptIsim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="İsim" />
+
+            <TextView
+                android:id="@+id/ptTelefon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Telefon" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnDuzenle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DÜZENLE" />
+
+        <Button
+            android:id="@+id/btnAra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ARA" />
+
+        <Button
+            android:id="@+id/btnSms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SMS" />
+    </LinearLayout>
+</LinearLayout>
