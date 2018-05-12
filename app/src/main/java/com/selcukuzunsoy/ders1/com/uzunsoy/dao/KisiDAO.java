@@ -40,6 +40,9 @@ public class KisiDAO implements BaseDao<Kisi> {
             return true;
         } catch (Exception e) {
             Log.e("TelefonRehberi", e.getMessage());
+        } finally {
+            if (db.isOpen())
+                db.close();
         }
         return false;
     }
@@ -47,37 +50,66 @@ public class KisiDAO implements BaseDao<Kisi> {
     @Override
     public Kisi read(int id) {
         db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
+        Cursor cur = null;
+        try {
 
-        Cursor cur = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO
-                + " WHERE " + DBHelper.KISI_COL_ID + " = " + id, null);
-        Kisi kisi = new Kisi();
-        kisi.setID(cur.getInt(0));
-        kisi.setAD(cur.getString(1));
-        kisi.setSOYAD(cur.getString(2));
-        kisi.setEMAIL(cur.getString(3));
-        kisi.setTELEFON(cur.getString(4));
-        return kisi;
+            cur = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO
+                    + " WHERE " + DBHelper.KISI_COL_ID + " = " + id, null);
+            Kisi kisi = new Kisi();
+            kisi.setID(cur.getInt(0));
+            kisi.setAD(cur.getString(1));
+            kisi.setSOYAD(cur.getString(2));
+            kisi.setEMAIL(cur.getString(3));
+            kisi.setTELEFON(cur.getString(4));
+            return kisi;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db.isOpen())
+                db.close();
+            if (!cur.isClosed())
+                cur.close();
+        }
+        return null;
     }
 
     public Kisi read(String telefon) {
         db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
-
-        Cursor cur = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO
-                + " WHERE " + DBHelper.KISI_COL_TELEFON + " LIKE '" + telefon + "%' ", null);
-        Kisi kisi = new Kisi();
-        kisi.setID(cur.getInt(0));
-        kisi.setAD(cur.getString(1));
-        kisi.setSOYAD(cur.getString(2));
-        kisi.setEMAIL(cur.getString(3));
-        kisi.setTELEFON(cur.getString(4));
-        return kisi;
+        Cursor cur = null;
+        try {
+            cur = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO
+                    + " WHERE " + DBHelper.KISI_COL_TELEFON + " LIKE '" + telefon + "%' ", null);
+            Kisi kisi = new Kisi();
+            kisi.setID(cur.getInt(0));
+            kisi.setAD(cur.getString(1));
+            kisi.setSOYAD(cur.getString(2));
+            kisi.setEMAIL(cur.getString(3));
+            kisi.setTELEFON(cur.getString(4));
+            return kisi;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db.isOpen())
+                db.close();
+            if (!cur.isClosed())
+                cur.close();
+        }
+        return null;
     }
 
     public int kisiSay() {
         db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
-
-        int kayitSayisi = (int) DatabaseUtils.queryNumEntries(db, DBHelper.KISI_TABLO);
-        return kayitSayisi;
+        try {
+            int kayitSayisi = (int) DatabaseUtils.queryNumEntries(db, DBHelper.KISI_TABLO);
+            return kayitSayisi;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db.isOpen())
+                db.close();
+        }
+        return 0;
     }
 
 
@@ -95,6 +127,9 @@ public class KisiDAO implements BaseDao<Kisi> {
             return true;
         } catch (Exception e) {
             Log.e("TelefonRehberi", e.getMessage());
+        } finally {
+            if (db.isOpen())
+                db.close();
         }
         return false;
     }
@@ -108,38 +143,50 @@ public class KisiDAO implements BaseDao<Kisi> {
             return true;
         } catch (Exception e) {
             Log.e("TelefonRehberi", e.getMessage());
+        } finally {
+            if (db.isOpen())
+                db.close();
         }
         return false;
     }
 
-    public List<Kisi> readAll(Integer count, Integer start){
+    public List<Kisi> readAll(Integer count, Integer start) {
         db = new DBHelper(AndroTool.getApp().getApplicationContext()).getReadableDatabase();
+        Cursor datalar = null;
+        try {
 
-        List<Kisi> tumKisiler = new ArrayList<>();
-        Cursor datalar = db.rawQuery("SELECT * FROM "+ DBHelper.KISI_TABLO +" ORDER BY ID LIMIT "+count+","+start,null);
-        datalar.moveToFirst();
-        while(datalar.isAfterLast()){
+            List<Kisi> tumKisiler = new ArrayList<>();
+            datalar = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO + " ORDER BY ID LIMIT " + count + "," + start, null);
+            datalar.moveToFirst();
+            while (datalar.isAfterLast()) {
 
-            Integer ID = datalar.getInt(datalar.getColumnIndex(DBHelper.KISI_COL_ID));
-            String  AD = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_AD));
-            String  SOYAD = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_SOYAD));
-            String  EMAIL = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_EMAIL));
-            String  TELEFON = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_TELEFON));
+                Integer ID = datalar.getInt(datalar.getColumnIndex(DBHelper.KISI_COL_ID));
+                String AD = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_AD));
+                String SOYAD = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_SOYAD));
+                String EMAIL = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_EMAIL));
+                String TELEFON = datalar.getString(datalar.getColumnIndex(DBHelper.KISI_COL_TELEFON));
 
-            Kisi kisi = new Kisi();
-            kisi.setID(ID);
-            kisi.setAD(AD);
-            kisi.setSOYAD(SOYAD);
-            kisi.setEMAIL(EMAIL);
-            kisi.setTELEFON(TELEFON);
+                Kisi kisi = new Kisi();
+                kisi.setID(ID);
+                kisi.setAD(AD);
+                kisi.setSOYAD(SOYAD);
+                kisi.setEMAIL(EMAIL);
+                kisi.setTELEFON(TELEFON);
 
-            tumKisiler.add(kisi);
-            datalar.moveToNext();
+                tumKisiler.add(kisi);
+                datalar.moveToNext();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db.isOpen())
+                db.close();
+            if (!datalar.isClosed())
+                datalar.close();
         }
-
         return null;
     }
-
 
 
 }

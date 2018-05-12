@@ -23,8 +23,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL("CREATE TABLE "+KISI_TABLO+" ("
-        + KISI_COL_ID+" integer primary key,"+KISI_COL_AD +" text,"
-        + KISI_COL_SOYAD +" text," +KISI_COL_EMAIL+" text,"+KISI_COL_TELEFON+" text)"
+        + KISI_COL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+KISI_COL_AD +" TEXT,"
+        + KISI_COL_SOYAD +" TEXT," +KISI_COL_EMAIL+" TEXT,"+KISI_COL_TELEFON+" TEXT)"
         );
 
     }
@@ -32,8 +32,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ KISI_TABLO);
-        onCreate(sqLiteDatabase);
+       // sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ KISI_TABLO);
+       // onCreate(sqLiteDatabase);
 
     }
 
