@@ -84,8 +84,7 @@ public class KisiCustomAdapter extends BaseAdapter {
             }
         });
 
-        viewHolderCustom.ad.setText(listem.get(listeninIndexi).getAD()
-                +" "+listem.get(listeninIndexi).getSOYAD());
+        viewHolderCustom.ad.setText(listem.get(listeninIndexi).getAD());
         viewHolderCustom.tel.setText(listem.get(listeninIndexi).getTELEFON());
         //viewHolderCustom.kisiId.setText(listem.get(listeninIndexi).getID());
 
