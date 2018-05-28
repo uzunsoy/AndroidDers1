@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
 
     <TextView
-        android:id="@+id/ptGenisYazi"
         android:layout_width="wrap_content"
+        android:id="@+id/ptGenisYazi"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Geniş Yazı" />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:layout_weight="1"
+        android:gravity="right|center"
         android:orientation="horizontal">
 
         <Space
@@ -24,7 +23,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -42,25 +41,25 @@
 
         </LinearLayout>
 
-        <Button
+        <ImageView
             android:id="@+id/btnDuzenle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="39dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
-            android:text="DÜZENLE" />
+            android:background="@drawable/edit_user" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnAra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
             android:layout_weight="1"
-            android:text="ARA" />
+            android:background="@drawable/gcalll" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnSms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
             android:layout_weight="1"
-            android:text="SMS" />
+            android:background="@drawable/sms_user" />
     </LinearLayout>
 </LinearLayout>

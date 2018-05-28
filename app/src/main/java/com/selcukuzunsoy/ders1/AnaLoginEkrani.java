@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.selcukuzunsoy.ders1.com.uzunsoy.modal.LoginState;
 import com.selcukuzunsoy.ders1.com.uzunsoy.tools.AndroTool;
+
+import java.util.Date;
 
 public class AnaLoginEkrani extends AppCompatActivity {
 
@@ -27,7 +30,8 @@ public class AnaLoginEkrani extends AppCompatActivity {
             if(kadi.equals("admin") && sifre.equals("123456")){
 
              //TODO: Ana ekranı çağır
-
+                LoginState.loginTime = new Date().getTime();
+                LoginState.geriSayim();
                 Intent ekran = new Intent(getApplicationContext(),Menu.class);
                 startActivity(ekran);
 

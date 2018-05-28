@@ -55,13 +55,16 @@ public class KisiDAO implements BaseDao<Kisi> {
 
             cur = db.rawQuery("SELECT * FROM " + DBHelper.KISI_TABLO
                     + " WHERE " + DBHelper.KISI_COL_ID + " = " + id, null);
-            Kisi kisi = new Kisi();
-            kisi.setID(cur.getInt(0));
-            kisi.setAD(cur.getString(1));
-            kisi.setSOYAD(cur.getString(2));
-            kisi.setEMAIL(cur.getString(3));
-            kisi.setTELEFON(cur.getString(4));
-            return kisi;
+            cur.moveToFirst();
+            if(!cur.isAfterLast()) {
+                Kisi kisi = new Kisi();
+                kisi.setID(cur.getInt(0));
+                kisi.setAD(cur.getString(1));
+                kisi.setSOYAD(cur.getString(2));
+                kisi.setEMAIL(cur.getString(3));
+                kisi.setTELEFON(cur.getString(4));
+                return kisi;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

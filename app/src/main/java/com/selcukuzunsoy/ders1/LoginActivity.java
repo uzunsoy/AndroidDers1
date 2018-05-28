@@ -30,7 +30,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.selcukuzunsoy.ders1.com.uzunsoy.modal.LoginState;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -316,7 +319,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            // TODO: register the new account here.
+
             Intent ekran = new Intent(getApplicationContext(),Home.class);
             startActivity(ekran);
             return true;

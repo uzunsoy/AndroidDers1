@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.selcukuzunsoy.ders1.com.uzunsoy.dao.KisiDAO;
 import com.selcukuzunsoy.ders1.com.uzunsoy.modal.Kisi;
+import com.selcukuzunsoy.ders1.com.uzunsoy.modal.LoginState;
 import com.selcukuzunsoy.ders1.com.uzunsoy.tools.AndroTool;
 import com.selcukuzunsoy.ders1.com.uzunsoy.tools.Ornek;
 
@@ -56,35 +57,6 @@ public class Home extends AppCompatActivity {
         kisi.setEMAIL(email);
         kisi.setTELEFON(telefon);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-       builder.setMessage("Kayıt ediyorum, emin misin?")
-               .setPositiveButton("Kaydet", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialogInterface, int i) {
-                       //AndroTool.mesajVer(getApplicationContext(),"Kişi Kayıt Edildi");
-                       /*Intent kisiListele = new Intent(getApplicationContext(),KisiListele.class);
-                       kisiListele.putExtra("ad",ad);
-                       kisiListele.putExtra("soyad",soyad);
-                       kisiListele.putExtra("telefon",telefon);
-                       kisiListele.putExtra("email",email);
-                       startActivity(kisiListele);*/
-
-                        if(new KisiDAO(getApplicationContext()).create(kisi)){
-                         AndroTool.mesajVer(getApplicationContext(),"Kayıt Başarılı");
-                        }else{
-                            AndroTool.mesajVer(getApplicationContext(),"Kayıt Yapılamadı");
-                        }
-                   }
-               })
-               .setNegativeButton("İptal", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialogInterface, int i) {
-                       AndroTool.mesajVer(getApplicationContext(),"İptal Edildi");
-
-                   }
-               }).create();
-       builder.show();
-
        //Dialog açmak için kullanılıyor
        AlertDialog.Builder customAlert = new AlertDialog.Builder(this);
 
@@ -96,7 +68,13 @@ public class Home extends AppCompatActivity {
                .setPositiveButton("Kaydet", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
-                       AndroTool.mesajVer(getApplicationContext(),"Kişi Kayıt Edildi");
+
+                       if(new KisiDAO(getApplicationContext()).create(kisi)){
+                           AndroTool.mesajVer(getApplicationContext(),"Kayıt Başarılı");
+                       }else{
+                           AndroTool.mesajVer(getApplicationContext(),"Kayıt Yapılamadı");
+                       }
+
                    }
                })
                 .setNegativeButton("İptal", new DialogInterface.OnClickListener() {
@@ -143,6 +121,11 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(LoginState.timeisup()){
+            finish();
+            Intent login = new Intent(this, AnaLoginEkrani.class);
+            startActivity(login);
+        }
         Log.i("BilgeAdam", "OnResume Çalıştı");
     }
 
